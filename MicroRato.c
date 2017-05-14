@@ -10,7 +10,7 @@
     void SrtScan();
     void EyesOnTarget();
     int beaconScan();
-    int onsigth, flagS, servoPos, count;
+    int onsigth, flagS, servoPos, count,sendir,senfre,senesq;;
     double x,y,t,beaconangle,normangle;
 
 int main(void)
@@ -27,7 +27,7 @@ int main(void)
   flagS = 1;
   count = 0;
   x=y=t=beaconangle=normangle=0;
- 	int sendir,senfre,senesq;
+ 
   while(1)
   {
     while(!startButton());
@@ -48,7 +48,7 @@ int main(void)
 	if(senesq < 400 && sendir >650 && senfre < 400){
 		setVel2(50,-15); // Virar para a Direita
 		delay(350);
-		setVel2)(0,0),
+		setVel2(0,0);
 		break;	
 
 // Será necessário medir outra vez a distância ao obstáculo? 
@@ -58,7 +58,7 @@ int main(void)
 	if(senesq > 600 && sendir < 400 && senfre < 400){
 		setVel2(-15,50); // Virar para a Esquerda
 		delay(350);
-		setVel2(0,0),
+		setVel2(0,0);
 		break;
 		// Será necessário medir outra vez a distancia do obstaculo ??? veremos
 	}
@@ -71,7 +71,7 @@ int main(void)
 			setVel2(-15,50); // Virar à Esquerda
 		}
 		delay(350);
-		setVel2)(0,0),
+		setVel2(0,0);
 		break;
 	
 	}
