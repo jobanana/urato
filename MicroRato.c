@@ -45,27 +45,30 @@ int main(void)
 	sendir = analogSensors.obstSensRight;
 	senfre = analogSensors.obstSensFront;
 	// obst. Esquerda
-	printf("if dir");
+	
 	if(senesq < 400 && sendir >650 && senfre < 400){
+		printf("if dir");
 		setVel2(50,-15); // Virar para a Direita
 		delay(1000);
-		setVel2(0,0);
+		setVel2(10,10);
 			
-
+		break;
 // Será necessário medir outra vez a distância ao obstáculo?
 	}
-	printf("if Esquerda");
 	// Obstc. Direita	
 	if(senesq > 600 && sendir < 400 && senfre < 400){
+			printf("if Esquerda");
+
 		setVel2(-15,50); // Virar para a Esquerda
 		delay(1000);
-		setVel2(0,0);
-		
+		setVel2(10,10);
+		break;
 		// Será necessário medir outra vez a distancia do obstaculo ??? veremos
 	}
 	// Obstc. Frente
-	printf("if frente");
+
 	if(senesq < 400 && sendir < 400 && senfre > 600){
+			printf("if frente");
 		if(servoPos < 15 && servoPos > 0 ){
 			setVel2(50,-15); // Virar para a Direita
 		}
@@ -73,9 +76,9 @@ int main(void)
 			setVel2(-15,50); // Virar à Esquerda
 		}
 		delay(1000);
-		setVel2(0,0);
+		setVel2(10,10);
 			
-	
+		break;
 	}
 
 //#######################################################
