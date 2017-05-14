@@ -47,7 +47,7 @@ int main(void)
 	// obst. Esquerda
 	if(senesq < 400 && sendir >650 && senfre < 400){
 		setVel2(50,-15); // Virar para a Direita
-		delay(350);
+		delay(10000);
 		setVel2(0,0);
 		break;	
 
@@ -57,7 +57,7 @@ int main(void)
 	// Obstc. Direita	
 	if(senesq > 600 && sendir < 400 && senfre < 400){
 		setVel2(-15,50); // Virar para a Esquerda
-		delay(350);
+		delay(10000);
 		setVel2(0,0);
 		break;
 		// Será necessário medir outra vez a distancia do obstaculo ??? veremos
@@ -70,7 +70,7 @@ int main(void)
 		else{
 			setVel2(-15,50); // Virar à Esquerda
 		}
-		delay(350);
+		delay(10000);
 		setVel2(0,0);
 		break;
 	
