@@ -10,7 +10,7 @@
     void SrtScan();
     void EyesOnTarget();
     int beaconScan();
-    int onsigth, flagS, servoPos, count,sendir,senfre,senesq;;
+    int onsigth, flagS, servoPos, count,sendir,senfre,senesq;
     double x,y,t,beaconangle,normangle;
 
 int main(void)
@@ -20,9 +20,10 @@ int main(void)
 	initPIC32();
   SERVO_WIDTH_MIN=975;
   SERVO_WIDTH_MAX=1955;
-	closedLoopControl( true );
+closedLoopControl( true );
 
 	setVel2(0, 0);
+
   servoPos=0;
   flagS = 1;
   count = 0;
@@ -36,38 +37,40 @@ int main(void)
     {
 
 	setVel2(10,10);
- //############################################
-// nova alteração jomi - 14/5/2017
-//############################################
+	waitTick40ms();
+
 	readAnalogSensors();	
 	printf("\n leu os sensores");
+
 	senesq = analogSensors.obstSensLeft;
 	sendir = analogSensors.obstSensRight;
 	senfre = analogSensors.obstSensFront;
+
+
 	// obst. Esquerda
-	
-	if(senesq < 400 && sendir >650 && senfre < 400){
+	if(senesq < 300 && sendir > 500 && senfre < 400){
 		printf("if dir");
 		setVel2(50,-15); // Virar para a Direita
 		delay(1000);
 		setVel2(10,10);
 			
 		break;
-// Será necessário medir outra vez a distância ao obstáculo?
+	// necessário medir outra vez a distância ao obstáculo?
 	}
 	// Obstc. Direita	
-	if(senesq > 600 && sendir < 400 && senfre < 400){
-			printf("if Esquerda");
-
+	if(senesq > 500 && sendir < 300 && senfre < 400){
+		
+		printf("if Esquerda");
+		
 		setVel2(-15,50); // Virar para a Esquerda
 		delay(1000);
 		setVel2(10,10);
 		break;
-		// Será necessário medir outra vez a distancia do obstaculo ??? veremos
+	//necessário medir outra vez a distancia do obstaculo 
 	}
-	// Obstc. Frente
 
-	if(senesq < 400 && sendir < 400 && senfre > 600){
+	// Obstc. Frente
+	if(senesq < 400 && sendir < 400 && senfre > 500){
 			printf("if frente");
 		if(servoPos < 15 && servoPos > 0 ){
 			setVel2(50,-15); // Virar para a Direita
@@ -81,11 +84,10 @@ int main(void)
 		break;
 	}
 
-//#######################################################
-// fim de alteração
-//#######################################################
+	printf("\n Fim de ciclo");
 
     } while(!stopButton());
+
     disableObstSens();
     }
     return 0;
