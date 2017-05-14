@@ -40,29 +40,31 @@ int main(void)
 // nova alteração jomi - 14/5/2017
 //############################################
 	readAnalogSensors();	
-	printf("leu os sensores");
+	printf("\n leu os sensores");
 	senesq = analogSensors.obstSensLeft;
 	sendir = analogSensors.obstSensRight;
 	senfre = analogSensors.obstSensFront;
 	// obst. Esquerda
+	printf("if dir");
 	if(senesq < 400 && sendir >650 && senfre < 400){
 		setVel2(50,-15); // Virar para a Direita
 		delay(1000);
 		setVel2(0,0);
-		break;	
+			
 
-// Será necessário medir outra vez a distância ao obstáculo? 
-
+// Será necessário medir outra vez a distância ao obstáculo?
 	}
+	printf("if Esquerda");
 	// Obstc. Direita	
 	if(senesq > 600 && sendir < 400 && senfre < 400){
 		setVel2(-15,50); // Virar para a Esquerda
 		delay(1000);
 		setVel2(0,0);
-		break;
+		
 		// Será necessário medir outra vez a distancia do obstaculo ??? veremos
 	}
 	// Obstc. Frente
+	printf("if frente");
 	if(senesq < 400 && sendir < 400 && senfre > 600){
 		if(servoPos < 15 && servoPos > 0 ){
 			setVel2(50,-15); // Virar para a Direita
@@ -72,7 +74,7 @@ int main(void)
 		}
 		delay(1000);
 		setVel2(0,0);
-		break;
+			
 	
 	}
 
