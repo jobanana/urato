@@ -27,26 +27,16 @@ int main(void)
   flagS = 1;
   count = 0;
   x=y=t=beaconangle=normangle=0;
+ 	int sendir,senfre,senesq;
   while(1)
   {
     while(!startButton());
     enableObstSens();
     do
     {
-      servoPos=beaconScan();
-      if (servoPos<15 && servoPos>-15) {
 
-      }else{
-        count +=1;
-      }
-      if(count>2)
-      {
-        setVel2(-50,50);
-        wait(5);
-        setVel2(0,0);
-        count=0;
-      }
-//############################################
+	setVel2(10,10);
+ //############################################
 // nova alteração jomi - 14/5/2017
 //############################################
 	readAnalogSensors();	
@@ -68,7 +58,7 @@ int main(void)
 	if(senesq > 600 && sendir < 400 && senfre < 400){
 		setVel2(-15,50); // Virar para a Esquerda
 		delay(350);
-		setVel2)(0,0),
+		setVel2(0,0),
 		break;
 		// Será necessário medir outra vez a distancia do obstaculo ??? veremos
 	}
@@ -95,6 +85,7 @@ int main(void)
     }
     return 0;
 }
+
 void SrtScan(){
   onsigth =  readBeaconSens();
   while(onsigth != 1){
