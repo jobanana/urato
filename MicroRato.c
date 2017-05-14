@@ -35,25 +35,7 @@ int main(void)
     {
       servoPos=beaconScan();
       if (servoPos<15 && servoPos>-15) {
-        setServoPos(servoPos);
-        getRobotPos(&x,&y,&t);
-        beaconangle=(double)servoPos*180/15;
-        normangle=-(t*180/PI);
-        printf("%f , %f \n",beaconangle, normangle);
-        if (abs(beaconangle-normangle)<5) {
-          setVel2(20,20);
-          wait(10);
-        }
-        if(beaconangle+1<normangle)
-        {
-          setVel2(-8,8);
-          wait(5);
-        }else
-        {
-          setVel2(8,-8);
-          wait(5);
-        }
-        count = 0;
+
       }else{
         count +=1;
       }
