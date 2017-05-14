@@ -48,7 +48,7 @@ closedLoopControl( true );
 
 
 	// obst. Esquerda
-	if(senesq < 300 && sendir > 500 && senfre < 400){
+	if(senesq < 200 && sendir > 300 && senfre < 200){
 		printf("if dir");
 		//setVel2(50,-15); // Virar para a Direita
 		TurnRight();
@@ -59,7 +59,7 @@ closedLoopControl( true );
 	// necessário medir outra vez a distância ao obstáculo?
 	}
 	// Obstc. Direita	
-	if(senesq > 500 && sendir < 300 && senfre < 400){
+	if(senesq > 300 && sendir < 200 && senfre < 200){
 		
 		printf("if Esquerda");
 		
@@ -72,7 +72,7 @@ closedLoopControl( true );
 	}
 
 	// Obstc. Frente
-	if(senesq < 400 && sendir < 400 && senfre > 500){
+	if(senesq < 200 && sendir < 200 && senfre > 300){
 			printf("if frente");
 		if(servoPos < 15 && servoPos > 0 ){
 			//setVel2(50,-15); // Virar para a Direita
@@ -132,14 +132,14 @@ int beaconScan() {
 
 void TurnRight() {
     setVel2(75,-15);
-    delay(500);
+    delay(800);
     setVel2(0,0);
 }
 
 void TurnLeft(){
 
     setVel2(-15,75);
-    delay(500);
+    delay(800);
     setVel2(0,0);
 }
 
