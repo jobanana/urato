@@ -47,12 +47,10 @@ int main(void)
         if(beaconangle+1<normangle)
         {
           setVel2(-8,8);
-          setServoPos((servoPos+=1));
           wait(5);
         }else
         {
           setVel2(8,-8);
-          setServoPos((servoPos-=1));
           wait(5);
         }
         count = 0;
