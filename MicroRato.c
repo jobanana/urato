@@ -50,11 +50,12 @@ closedLoopControl( true );
 	// obst. Esquerda
 	if(senesq < 300 && sendir > 500 && senfre < 400){
 		printf("if dir");
-		setVel2(50,-15); // Virar para a Direita
+		//setVel2(50,-15); // Virar para a Direita
+		TurnRight();
 		delay(1000);
 		setVel2(10,10);
 			
-		break;
+		
 	// necessário medir outra vez a distância ao obstáculo?
 	}
 	// Obstc. Direita	
@@ -62,10 +63,11 @@ closedLoopControl( true );
 		
 		printf("if Esquerda");
 		
-		setVel2(-15,50); // Virar para a Esquerda
+		//setVel2(-15,50); // Virar para a Esquerda
+		TurnLeft();
 		delay(1000);
 		setVel2(10,10);
-		break;
+		
 	//necessário medir outra vez a distancia do obstaculo 
 	}
 
@@ -73,16 +75,17 @@ closedLoopControl( true );
 	if(senesq < 400 && sendir < 400 && senfre > 500){
 			printf("if frente");
 		if(servoPos < 15 && servoPos > 0 ){
-			setVel2(50,-15); // Virar para a Direita
+			//setVel2(50,-15); // Virar para a Direita
+			TurnRight();
 		}
 		else{
-			setVel2(-15,50); // Virar à Esquerda
+			//setVel2(-15,50); // Virar à Esquerda
+			TurnLeft();
 		}
 		delay(1000);
 		setVel2(10,10);
 			
-		break;
-	}
+			}
 
 	printf("\n Fim de ciclo");
 
