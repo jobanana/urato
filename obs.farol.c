@@ -25,7 +25,7 @@ int groundSensor;
   SERVO_WIDTH_MAX=1955;
 closedLoopControl( true );
 
-	setVel2(0, 0);
+	setVel2(20,20);
 
   servoPos=0;
   flagS = 1;
