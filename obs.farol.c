@@ -39,9 +39,6 @@ closedLoopControl( true );
     do
     {
 	
-	setVel2(60,60);
-	waitTick40ms();
-
 	readAnalogSensors();	
 	printf("\n leu os sensores");
 
@@ -51,39 +48,50 @@ closedLoopControl( true );
 	sendir = analogSensors.obstSensRight;
 	senfre = analogSensors.obstSensFront;
 
-
-	// obst. Esquerda
+	setVel2(20,20);
+	
+	// Detec obst. Direita
 	if( sendir > 350){
-		printf("if dir");
-		//setVel2(50,-15); // Virar para a Direita
-		TurnLeft();
-		//delay(1000);
-		//setVel2(10,10);
-			
+		printf("Ob. Direita");
 		
-	// necessário medir outra vez a distância ao obstáculo?
+		setVel2(-15,80); // Virar para a Esquerda		
+		delay(500);
+		//setVel2(20,20);
+
+		if(sendir > 450){
+			setVel2(0,0); 
+			delay(200);
+			setVel2(-25,90); // demasiado agressivo? 
+			delay(800);
+		}
+			
 	}
-	// Obstc. Direita	
+
+	// Detec. obst. Esquerda	
 	if(senesq > 350){
 		
-		printf("if Esquerda");
+		printf( "Obs. Esquerda");
 		
-		//setVel2(-15,80); // Virar para a Esquerda
-		TurnRight();
-		//delay(1000);
-		setVel2(60,60);
-		
-	//necessário medir outra vez a distancia do obstaculo 
+		setVel2(80,-15); // Virar para a Esquerda
+		delay(500);
+		setVel2(20,20);
+			if(senesq > 450){
+			setVel2(0,0); 
+			delay(200);
+			setVel2(90,-25); // demasiado agressivo? 
+			delay(800);
+		}
+
+	
 	}
 
 	// Obstc. Frente
-	if(senfre > 350){
-			printf("if frente");
-		setVel2(90,-25);
-		delay(900);
-		setVel2(60,60);
-			
-			}
+	if(senfre > 400){
+			setVel2(0,0);
+			printf("Ob. frente");
+			SrtScan()
+	
+	}
 
 	printf("\n Fim de ciclo");
 
@@ -95,17 +103,12 @@ closedLoopControl( true );
 }
 
 void SrtScan(){
-  onsigth =  readBeaconSens();
-  while(onsigth != 1){
-    if (flagS==1) {
-      setVel2(50,-50);
-    }else
-    {
-      setVel2(-50,50);
-    }
-      onsigth = readBeaconSens();
-  }
-  flagS= !flagS;
+	while(!readBeacon()){
+		setVel2(-50,50)
+	}
+	setVel2(0,0);
+	delay(200,200);
+	
 }
 int beaconScan() {
     if (servoPos==-15) {
