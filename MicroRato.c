@@ -53,42 +53,42 @@ closedLoopControl( true );
 
 
 	// obst. Esquerda
-	if(senesq < 200 && sendir > 300 && senfre < 200){
+	if(senesq < 300 && sendir > 500 && senfre < 300){
 		printf("if dir");
 		//setVel2(50,-15); // Virar para a Direita
 		TurnRight();
-		delay(1000);
-		setVel2(10,10);
+		//delay(1000);
+		//setVel2(10,10);
 			
 		
 	// necessário medir outra vez a distância ao obstáculo?
 	}
 	// Obstc. Direita	
-	if(senesq > 300 && sendir < 200 && senfre < 200){
+	if(senesq > 500 && sendir < 300 && senfre < 300){
 		
 		printf("if Esquerda");
 		
-		//setVel2(-15,50); // Virar para a Esquerda
+		//setVel2(-15,80); // Virar para a Esquerda
 		TurnLeft();
-		delay(1000);
+		//delay(1000);
 		setVel2(10,10);
 		
 	//necessário medir outra vez a distancia do obstaculo 
 	}
 
 	// Obstc. Frente
-	if(senesq < 200 && sendir < 200 && senfre > 300){
+	if(senesq < 300 && sendir < 300 && senfre > 500){
 			printf("if frente");
 		if(servoPos < 15 && servoPos > 0 ){
-			//setVel2(50,-15); // Virar para a Direita
+			//setVel2(80,-15); // Virar para a Direita
 			TurnRight();
 		}
 		else{
 			//setVel2(-15,50); // Virar à Esquerda
 			TurnLeft();
 		}
-		delay(1000);
-		setVel2(10,10);
+		//delay(1000);
+		//setVel2(10,10);
 			
 			}
 
@@ -136,14 +136,14 @@ int beaconScan() {
 }
 
 void TurnRight() {
-    setVel2(75,-15);
+    setVel2(90,-25);
     delay(800);
     setVel2(0,0);
 }
 
 void TurnLeft(){
 
-    setVel2(-15,75);
+    setVel2(-25,90);
     delay(800);
     setVel2(0,0);
 }
