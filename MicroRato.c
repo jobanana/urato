@@ -39,7 +39,7 @@ closedLoopControl( true );
     do
     {
 	
-	setVel2(30,30);
+	setVel2(60,60);
 	waitTick40ms();
 
 	readAnalogSensors();	
@@ -71,7 +71,7 @@ closedLoopControl( true );
 		//setVel2(-15,80); // Virar para a Esquerda
 		TurnRight();
 		//delay(1000);
-		setVel2(30,30);
+		setVel2(60,60);
 		
 	//necessário medir outra vez a distancia do obstaculo 
 	}
@@ -81,7 +81,7 @@ closedLoopControl( true );
 			printf("if frente");
 		setVel2(90,-25);
 		delay(900);
-		setVel2(30,30);
+		setVel2(60,60);
 			
 			}
 
