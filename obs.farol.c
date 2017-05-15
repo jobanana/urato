@@ -52,44 +52,24 @@ closedLoopControl( true );
 	
 	// Detec obst. Direita
 	if( sendir > 350){
-		printf("Ob. Direita");
-		
-		setVel2(-15,80); // Virar para a Esquerda		
-		delay(500);
-		//setVel2(20,20);
-
-		if(sendir > 450){
-			setVel2(0,0); 
-			delay(200);
-			setVel2(-25,90); // demasiado agressivo? 
-			delay(800);
-		}
-			
+		setVel2(-15,60);
+					
 	}
 
 	// Detec. obst. Esquerda	
 	if(senesq > 350){
-		
-		printf( "Obs. Esquerda");
-		
-		setVel2(80,-15); // Virar para a Esquerda
-		delay(500);
-		setVel2(20,20);
-			if(senesq > 450){
-			setVel2(0,0); 
-			delay(200);
-			setVel2(90,-25); // demasiado agressivo? 
-			delay(800);
-		}
-
-	
+		setVel2(60,-15);
+			
 	}
 
 	// Obstc. Frente
 	if(senfre > 400){
-			setVel2(0,0);
-			printf("Ob. frente");
-			SrtScan()
+		if(senesq > sendir){
+			setVel2(60,-15);
+		}
+		else{
+			setVel2(-15,60);
+		}
 	
 	}
 
