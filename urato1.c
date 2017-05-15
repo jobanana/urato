@@ -54,7 +54,7 @@ int main(void)
 				setVel2(-20,20);
 				//printf("Sdr=%d \n",analogSensors.obstSensRight);
 				readAnalogSensors();
-				while (analogSensors.obstSensLeft<350)
+				while (analogSensors.obstSensLeft>350)
 				{readAnalogSensors();}
 
 			}
