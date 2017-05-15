@@ -15,7 +15,7 @@
 	void pid_to_beacon();
 	int onsigth, flagS, servoPos, count,sendir,senfre,senesq;
 	double x,y,t,tpos,t_a,h,beaconangle,normangle,ypos,u_p,u_d,u_i,u_i_a,u,e,e_a,K,Td,Ti;
-
+  int rd;
 int main(void)
 {
 	SERVO_WIDTH_MIN=950;
@@ -40,32 +40,26 @@ int main(void)
 	while (1) {
 		while(!startButton());
     enableObstSens();
-		servoPos=beaconScan();
 		do
     {
 			readAnalogSensors();
-			pid_to_beacon();
+			//printf("Sfr=%d \n",analogSensors.obstSensFront);
 			senesq = analogSensors.obstSensLeft;
 			sendir = analogSensors.obstSensRight;
 			senfre = analogSensors.obstSensFront;
 			// obst. Esquerda
+			setVel2(20,20);
+			rd = rand()/3276;
+			if (analogSensors.obstSensFront >450) {
+				setVel2(-20,20);
+				//printf("Sdr=%d \n",analogSensors.obstSensRight);
+				readAnalogSensors();
+				while (analogSensors.obstSensLeft<350)
+				{readAnalogSensors();}
 
-			if( sendir > 325){
-				TurnLeft();
-				setVel2(30,30);
 			}
-			// Obstc. Direita
-			if(senesq > 325){
-				TurnRight();
-				setVel2(30,30);
-			}
-			// Obstc. Frente
-			if(senfre > 325){
-				setVel2(-25,90);
-				delay(900);
-				setVel2(30,30);
-				}
-		   } while(readLineSensors(50)!=0x1F);
+
+		   }while(readLineSensors(50)!=0x1F);
 			 leds(0xF);
 	     setVel2(0,0);
 		   disableObstSens();
@@ -168,14 +162,10 @@ int beaconScan() {
 }
 void TurnRight() {
     setVel2(80,-20);
-    delay(3000);
-    setVel2(0,0);
 }
 void TurnLeft(){
 
     setVel2(-20,80);
-    delay(3000);
-    setVel2(0,0);
 }
 void GoFrwd(){
      setVel2(20,20);
