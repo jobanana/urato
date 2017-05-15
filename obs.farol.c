@@ -31,15 +31,15 @@ closedLoopControl( true );
   flagS = 1;
   count = 0;
   x=y=t=beaconangle=normangle=0;
- 
+
   while(1)
   {
     while(!startButton());
     enableObstSens();
     do
     {
-	
-	readAnalogSensors();	
+
+	readAnalogSensors();
 	printf("\n leu os sensores");
 
 	printf("Obst_left=%03d, Obst_center=%03d, Obst_right= 03d, Bat_voltage=%03d, Ground_sens=", analogSensors.obstSensLeft,analogSensors.obstSensFront, analogSensors.obstSensRight, analogSensors.batteryVoltage);
@@ -49,17 +49,17 @@ closedLoopControl( true );
 	senfre = analogSensors.obstSensFront;
 
 	setVel2(20,20);
-	
+
 	// Detec obst. Direita
 	if( sendir > 350){
 		setVel2(-15,60);
-					
+
 	}
 
-	// Detec. obst. Esquerda	
+	// Detec. obst. Esquerda
 	if(senesq > 350){
 		setVel2(60,-15);
-			
+
 	}
 
 	// Obstc. Frente
@@ -70,7 +70,7 @@ closedLoopControl( true );
 		else{
 			setVel2(-15,60);
 		}
-	
+
 	}
 
 	printf("\n Fim de ciclo");
@@ -88,7 +88,7 @@ void SrtScan(){
 	}
 	setVel2(0,0);
 	delay(200,200);
-	
+
 }
 int beaconScan() {
     if (servoPos==-15) {
@@ -132,4 +132,3 @@ void GoBack(){
     setVel2(0,0);
     setVel2(-20,-20);
 }
-
