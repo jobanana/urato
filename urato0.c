@@ -17,11 +17,11 @@
 
 int main(void)
 {
-	SERVO_WIDTH_MIN=975;
-  SERVO_WIDTH_MAX=1955;
+	SERVO_WIDTH_MIN=950;
+  SERVO_WIDTH_MAX=1980;
 	initPIC32();
-  SERVO_WIDTH_MIN=975;
-  SERVO_WIDTH_MAX=1955;
+  SERVO_WIDTH_MIN=950;
+  SERVO_WIDTH_MAX=1980;
 	closedLoopControl( true );
 	setVel2(0, 0);
 
@@ -30,10 +30,10 @@ int main(void)
   count = 0;
 	e_a=0;
   u_i_a=0;
-  K=0.3;
+  K=0.2;
   Ti=0.0001;
   Td=0.1;
-  h=0.1;
+  h=0.5;
   x=y=t=beaconangle=normangle=0;
 
 	while (1) {
@@ -42,40 +42,46 @@ int main(void)
 		servoPos=beaconScan();
 		do
     {
-			setVel2(30,30);
-	  	waitTick40ms();
 			readAnalogSensors();
-			//printf("\n leu os sensores");
+			getRobotPos(&x,&y,&t);
+			tpos=t-t_a;
+			servoPos=moveBeaconTo(servoPos,e);
+			beaconangle=(double)servoPos*180/15;
+			ypos= tpos*180/PI;
+			e=beaconangle-ypos;
+			u_p=K*e;
+			u_d=K*Td*(e-e_a)/h;
+			u_i=e*Ti*h/K + u_i_a;
+			u=u_p+u_d/*+u_i*/;
+			setVel2(50+u,50-u);
+			u_i_a=u_i;
+			e_a=e;
+			t_a=t;
+			if (abs(e)<5) {
+				setVel2(50,50);
+			}
 			senesq = analogSensors.obstSensLeft;
 			sendir = analogSensors.obstSensRight;
 			senfre = analogSensors.obstSensFront;
 			// obst. Esquerda
 			if( sendir > 325){
-				//printf("if dir");
-				//setVel2(50,-15); // Virar para a Direita
 				TurnLeft();
-				//delay(1000);
 				setVel2(30,30);
-			// necess�rio medir outra vez a dist�ncia ao obst�culo?
 			}
 			// Obstc. Direita
 			if(senesq > 325){
-				//printf("if Esquerda");
-				//setVel2(-15,80); // Virar para a Esquerda
 				TurnRight();
-				//delay(1000);
 				setVel2(30,30);
-			//necess�rio medir outra vez a distancia do obstaculo
 			}
 			// Obstc. Frente
 			if(senfre > 325){
-				//printf("if frente");
 				setVel2(-25,90);
 				delay(900);
 				setVel2(30,30);
 				}
-			//printf("\n Fim de ciclo");
-		   } while(!stopButton());
+		   } while(readLineSensors(50)!=0x1F);
+			 leds(0xF);
+	     setVel2(0,0);
 		   disableObstSens();
 		}
 		return 0;
@@ -114,12 +120,15 @@ void SrtScan(){
   flagS= !flagS;
 }
 int beaconScan() {
+  count=0;
+  servoPos=-15;
+  while (1) {
     if (servoPos==-15) {
       for (servoPos=-15; servoPos <15; servoPos+=1) {
         setServoPos(servoPos);
         delay(600);
         if (readBeaconSens()) {
-          return servoPos;
+          break;
         }
       }
     }
@@ -128,10 +137,27 @@ int beaconScan() {
         setServoPos(servoPos);
         delay(600);
         if (readBeaconSens()) {
-          return servoPos;
+          break;
         }
       }
     }
+    if (servoPos<15 && servoPos>-15) {
+      count=0;
+      return servoPos;
+      break;
+    }
+    else
+    {
+      count+=1;
+    }
+    if(count>=1)
+    {
+      setVel2(-50,50);
+      wait(5);
+      setVel2(0,0);
+      count=0;
+    }
+  }
 }
 void TurnRight() {
     setVel2(80,-20);
