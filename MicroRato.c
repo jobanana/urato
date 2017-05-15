@@ -15,6 +15,9 @@
 
 int main(void)
 {
+
+int groundSensor;
+
   SERVO_WIDTH_MIN=975;
   SERVO_WIDTH_MAX=1955;
 	initPIC32();
@@ -35,12 +38,14 @@ closedLoopControl( true );
     enableObstSens();
     do
     {
-
+	
 	setVel2(10,10);
 	waitTick40ms();
 
 	readAnalogSensors();	
 	printf("\n leu os sensores");
+
+	printf("Obst_left=%03d, Obst_center=%03d, Obst_right= 03d, Bat_voltage=%03d, Ground_sens=", analogSensors.obstSensLeft,analogSensors.obstSensFront, analogSensors.obstSensRight, analogSensors.batteryVoltage);
 
 	senesq = analogSensors.obstSensLeft;
 	sendir = analogSensors.obstSensRight;
