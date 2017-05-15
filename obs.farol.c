@@ -31,15 +31,15 @@ closedLoopControl( true );
   flagS = 1;
   count = 0;
   x=y=t=beaconangle=normangle=0;
-
+ 
   while(1)
   {
     while(!startButton());
     enableObstSens();
     do
     {
-
-	readAnalogSensors();
+	
+	readAnalogSensors();	
 	printf("\n leu os sensores");
 
 	printf("Obst_left=%03d, Obst_center=%03d, Obst_right= 03d, Bat_voltage=%03d, Ground_sens=", analogSensors.obstSensLeft,analogSensors.obstSensFront, analogSensors.obstSensRight, analogSensors.batteryVoltage);
@@ -49,55 +49,21 @@ closedLoopControl( true );
 	senfre = analogSensors.obstSensFront;
 
 	setVel2(20,20);
-
+	
 	// Detec obst. Direita
 	if( sendir > 350){
-<<<<<<< HEAD
 		setVel2(-15,60);
 					
-=======
-		printf("Ob. Direita");
-
-		setVel2(-15,80); // Virar para a Esquerda
-		delay(500);
-		//setVel2(20,20);
-
-		if(sendir > 450){
-			setVel2(0,0);
-			delay(200);
-			setVel2(-25,90); // demasiado agressivo?
-			delay(800);
-		}
-
->>>>>>> c471187deda7dd5ecc8296e7f58565768acc6e2a
 	}
 
-	// Detec. obst. Esquerda
+	// Detec. obst. Esquerda	
 	if(senesq > 350){
-<<<<<<< HEAD
 		setVel2(60,-15);
 			
-=======
-
-		printf( "Obs. Esquerda");
-
-		setVel2(80,-15); // Virar para a Esquerda
-		delay(500);
-		setVel2(20,20);
-			if(senesq > 450){
-			setVel2(0,0);
-			delay(200);
-			setVel2(90,-25); // demasiado agressivo?
-			delay(800);
-		}
-
-
->>>>>>> c471187deda7dd5ecc8296e7f58565768acc6e2a
 	}
 
 	// Obstc. Frente
 	if(senfre > 400){
-<<<<<<< HEAD
 		if(senesq > sendir){
 			setVel2(60,-15);
 		}
@@ -105,12 +71,6 @@ closedLoopControl( true );
 			setVel2(-15,60);
 		}
 	
-=======
-			setVel2(0,0);
-			printf("Ob. frente");
-			SrtScan();
-
->>>>>>> c471187deda7dd5ecc8296e7f58565768acc6e2a
 	}
 
 	printf("\n Fim de ciclo");
@@ -123,12 +83,12 @@ closedLoopControl( true );
 }
 
 void SrtScan(){
-	while(!readBeacon()){
-		setVel2(-50,50);
+	while(!readBeaconSens()){
+		setVel2(-50,50)
 	}
 	setVel2(0,0);
-	delay(200);
-
+	delay(200,200);
+	
 }
 int beaconScan() {
     if (servoPos==-15) {
@@ -172,3 +132,4 @@ void GoBack(){
     setVel2(0,0);
     setVel2(-20,-20);
 }
+
