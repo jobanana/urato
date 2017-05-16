@@ -61,12 +61,6 @@ int main(void)
       waitTick20ms();
       contagem+=1;
       if (contagem == 100) {
-        /*while (abs(t)>0.1) {
-          setVel2(-20,20);
-          getRobotPos(&y,&x,&t);
-        }
-        setVel2(0,0);
-        wait(10);*/
         moveBeaconToOrigin(-x,y);
         contagem=0;
       }
@@ -83,32 +77,21 @@ int main(void)
     return 0;
 }
 void moveBeaconToOrigin(double xi, double yi){
-  //printf("%f, %f\n",xi,yi);
-  double a,b,c;
-  /*do {
-    setVel2(20,-20);
-    getRobotPos(&a,&b,&c);
-  }while (abs(c)>0.05);
-*/
   double newangle=0;
   if (xi>0 && yi>0) { //1ºQ
     newangle=atan((yi)/(xi))+PI/2;
-    //printf("%f, %f, %f\n",xi, yi, newangle);
     leds(0x8);
   }
   if (xi>0 && yi<0) { //4ºQ
     newangle=atan(fabs(xi)/fabs(yi));
-    //printf("%f\n", newangle);
     leds(0x1);
   }
   if (xi<0 && yi<0) { //3ºQ
     newangle= -atan(xi/yi);
-    //printf("%f\n", newangle);
     leds(0x2);
   }
   if (xi<0 && yi>0) { //2ºQ
     newangle=-atan(fabs(yi)/fabs(xi))-PI/2;
-    //printf("%f, %f, %f\n",xi, yi, newangle);
     leds(0x4);
   }
     do{
